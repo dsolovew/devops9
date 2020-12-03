@@ -1,0 +1,5 @@
+---
+# vars file for deploy
+repo_url: https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
+workspace: /usr/boxfuse
+

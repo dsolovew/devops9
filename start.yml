@@ -1,0 +1,15 @@
+---
+- name: deploy server config
+  hosts: deploy_servers
+  become: yes
+
+  roles:
+   - deploy
+
+
+- name: prod server config
+  hosts: prod_servers
+  become: yes
+
+  roles:
+   - prod

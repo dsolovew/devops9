@@ -1,0 +1,30 @@
+---
+# tasks file for deploy
+- name: install jre package
+  apt:
+   name: default-jre
+   state: present
+
+- name: install git package
+  apt:
+   name: git
+   state: present
+
+- name: install maven package
+  apt:
+   name: maven
+   state: present
+   
+- name: git clone boxfuse
+  git:
+   repo: "{{ repo_url }}"
+   dest: "{{ workspace }}"
+
+- name: build application
+  shell: mvn package chdir="{{ workspace }}"
+  run_once: true
+
+- name: copy artifact from deploy to master host
+  fetch:
+    src: /usr/boxfuse/target/hello-1.0.war
+    dest: /tmp

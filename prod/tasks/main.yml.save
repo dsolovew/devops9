@@ -1,0 +1,11 @@
+---
+# tasks file for prod
+- name: install tomcat
+  apt:
+   name: tomcat8
+   state: present
+
+- name: copy war from deploy server to prod
+  copy:
+   src: /tmp/34.65.147.136/usr/boxfuse/target/hello-1.0.war
+   dest: /var/lib/tomcat8/webapps
