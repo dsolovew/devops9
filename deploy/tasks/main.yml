@@ -1,20 +1,12 @@
 ---
 # tasks file for deploy
-- name: install jre package
-  apt:
-   name: default-jre
-   state: present
+- name: install packages
+  apt: name={{item}} state=present
+  with_items:
+    - default-jre
+    - git
+    - maven
 
-- name: install git package
-  apt:
-   name: git
-   state: present
-
-- name: install maven package
-  apt:
-   name: maven
-   state: present
-   
 - name: git clone boxfuse
   git:
    repo: "{{ repo_url }}"
@@ -26,5 +18,5 @@
 
 - name: copy artifact from deploy to master host
   fetch:
-    src: /usr/boxfuse/target/hello-1.0.war
-    dest: /tmp
+    src: "{{ artifact }}"
+    dest: "{{ local_tmp }}"
